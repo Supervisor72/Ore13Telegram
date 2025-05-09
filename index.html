@@ -1,180 +1,101 @@
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Report Ore 13</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
       margin: 0;
       padding: 20px;
-      background-color: #f5f5f5;
     }
     .container {
       max-width: 800px;
       margin: 0 auto;
       background-color: white;
-      padding: 25px;
+      padding: 20px;
       border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
     h1 {
       color: #2c3e50;
+      font-size: 24px;
+      margin-bottom: 30px;
       text-align: center;
+    }
+    .section-title {
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: #34495e;
+    }
+    .content {
       margin-bottom: 25px;
     }
-    .form-group {
-      margin-bottom: 20px;
-    }
-    label {
+    .content span {
       display: block;
-      font-weight: 600;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
     }
-    input[type="number"], select {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
+    .content ul {
+      margin: 15px 0;
+      padding-left: 20px;
     }
-    .submit-section {
+    .content ul li {
+      margin-bottom: 10px;
+    }
+    .footer {
       text-align: center;
-      margin-top: 30px;
-    }
-    button {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 12px 25px;
-      font-size: 16px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    button:disabled {
-      background-color: #aaa;
-    }
-    button:hover:not(:disabled) {
-      background-color: #0056b3;
+      margin-top: 40px;
+      color: #777;
+      font-size: 12px;
     }
   </style>
 </head>
 <body>
-<div class="container">
-  <h1>Report Ore 13</h1>
+  <div class="container">
+    <h1>Report Ore 13</h1>
 
-  <div class="form-group">
-    <label for="punto-vendita">Punto Vendita</label>
-    <select id="punto-vendita" required>
-      <option value="">Seleziona punto vendita</option>
-      <option value="FANO">FANO</option>
-      <option value="MONSANO">MONSANO</option>
-      <option value="OSIMO">OSIMO</option>
-      <option value="MACERATA">MACERATA</option>
-      <option value="CIVITANOVA">CIVITANOVA</option>
-      <option value="PESARO">PESARO</option>
-    </select>
+    <div class="content">
+      <span class="section-title">🕐 Dati Principali</span>
+      <span><strong>Punto Vendita:</strong> 
+        <select name="punto-vendita">
+          <option value="FANO">FANO</option>
+          <option value="MONSANO">MONSANO</option>
+          <option value="OSIMO">OSIMO</option>
+          <option value="MACERATA">MACERATA</option>
+          <option value="CIVITANOVA">CIVITANOVA</option>
+          <option value="PESARO">PESARO</option>
+        </select>
+      </span>
+      <span><strong>Venduto (€):</strong> 1200</span>
+      <span><strong>Controcifra Giorno (€):</strong> 450</span>
+      <span><strong>Posizione Classifica:</strong> 3°</span>
+      <span><strong>Incidenza Garanzie (%):</strong> 8.5%</span>
+    </div>
+
+    <div class="content">
+      <span class="section-title">📦 Dettagli Prodotti</span>
+      <ul>
+        <li><strong>iPhone (pezzi):</strong> 15</li>
+        <li><strong>Garanzie iPhone (pezzi):</strong> 5</li>
+        <li><strong>Apple PC (pezzi):</strong> 10</li>
+        <li><strong>Garanzie Apple PC (pezzi):</strong> 3</li>
+        <li><strong>Attivazioni Ho (pezzi):</strong> 7</li>
+        <li><strong>Attivazioni Very Mobile (pezzi):</strong> 10</li>
+        <li><strong>OLED (pezzi):</strong> 8</li>
+        <li><strong>AEG Bianco (pezzi):</strong> 12</li>
+        <li><strong>Asciugatrici (pezzi):</strong> 9</li>
+        <li><strong>Scope No Fili (pezzi):</strong> 6</li>
+        <li><strong>iRobot (pezzi):</strong> 4</li>
+        <li><strong>Caffè Automatiche (pezzi):</strong> 5</li>
+      </ul>
+    </div>
+
+    <div class="footer">
+      <p>Questo è un messaggio automatico. Non rispondere direttamente a questa email.</p>
+    </div>
   </div>
-
-  <div class="form-group"><label>Venduto (€)</label><input type="number" id="venduto" required></div>
-  <div class="form-group"><label>Controcifra Giorno (€)</label><input type="number" id="controcifra" required></div>
-  <div class="form-group"><label>Pos Classifica Attach Mese</label><input type="number" id="classifica" required></div>
-  <div class="form-group"><label>Incidenza Garanzie Mese (%)</label><input type="number" step="0.01" id="garanzie" required></div>
-
-  <div class="form-group"><label>iPhone (pezzi)</label><input type="number" id="iphone"></div>
-  <div class="form-group"><label>Garanzie iPhone (pezzi)</label><input type="number" id="garanzie-iphone"></div>
-  <div class="form-group"><label>Apple PC (pezzi)</label><input type="number" id="apple-pc"></div>
-  <div class="form-group"><label>Garanzie Apple PC (pezzi)</label><input type="number" id="garanzie-apple-pc"></div>
-  <div class="form-group"><label>Attivazioni Ho (pezzi)</label><input type="number" id="ho"></div>
-  <div class="form-group"><label>Attivazioni Very Mobile (pezzi)</label><input type="number" id="very"></div>
-  <div class="form-group"><label>OLED (pezzi)</label><input type="number" id="oled"></div>
-  <div class="form-group"><label>AEG Bianco (pezzi)</label><input type="number" id="aeg"></div>
-  <div class="form-group"><label>Asciugatrici (pezzi)</label><input type="number" id="asciugatrici"></div>
-  <div class="form-group"><label>Scope No Fili (pezzi)</label><input type="number" id="scope"></div>
-  <div class="form-group"><label>iRobot (pezzi)</label><input type="number" id="irobot"></div>
-  <div class="form-group"><label>Caffè Automatiche (pezzi)</label><input type="number" id="caffe"></div>
-
-  <div class="submit-section">
-    <button id="submitBtn" onclick="inviaTelegram()">Invia Report</button>
-  </div>
-</div>
-
-<script>
-  function inviaTelegram() {
-    const btn = document.getElementById('submitBtn');
-    btn.disabled = true;
-    btn.innerText = 'Invio in corso...';
-
-    const get = id => document.getElementById(id)?.value?.trim();
-
-    const pv = get('punto-vendita');
-    const venduto = get('venduto');
-    const controcifra = get('controcifra');
-    const classifica = get('classifica');
-    const garanzie = get('garanzie');
-
-    if (!pv || !venduto || !controcifra || !classifica || !garanzie) {
-      alert('Compila i campi obbligatori.');
-      btn.disabled = false;
-      btn.innerText = 'Invia Report';
-      return;
-    }
-
-    let msg = `🕐 *Report Ore 13*
-
-🏬 *${pv}*
-
-📊 *Dati Principali*` +
-              `
-• Venduto: €${venduto}` +
-              `
-• Controcifra: €${controcifra}` +
-              `
-• Posizione Classifica: ${classifica}` +
-              `
-• Incidenza Garanzie: ${garanzie}%`;
-
-    const extraFields = [
-      { id: 'iphone', label: '📱 iPhone' },
-      { id: 'garanzie-iphone', label: '📱 Garanzie iPhone' },
-      { id: 'apple-pc', label: '💻 Apple PC' },
-      { id: 'garanzie-apple-pc', label: '💻 Garanzie Apple PC' },
-      { id: 'ho', label: '📶 Attivazioni Ho' },
-      { id: 'very', label: '📶 Very Mobile' },
-      { id: 'oled', label: '📺 OLED' },
-      { id: 'aeg', label: '🔌 AEG Bianco' },
-      { id: 'asciugatrici', label: '🌀 Asciugatrici' },
-      { id: 'scope', label: '🧹 Scope No Fili' },
-      { id: 'irobot', label: '🤖 iRobot' },
-      { id: 'caffe', label: '☕ Caffè Automatiche' },
-    ];
-
-    extraFields.forEach(f => {
-      const val = get(f.id);
-      if (val) msg += `
-${f.label}: ${val}pz`;
-    });
-
-    fetch("https://script.google.com/macros/s/AKfycbyiPlrHqty6y4lyasr_D9hVwuh5nU6w052tJTDTEEZGGT8_NKjGyB2LA5LqpFkk9KHWdQ/exec", {
-      method: "POST",
-      body: JSON.stringify({ message: msg }),
-      headers: { "Content-Type": "application/json" }
-    })
-    .then(res => res.text())
-    .then(data => {
-      alert("✅ Messaggio Telegram inviato!");
-      btn.innerText = 'Inviato ✅';
-    })
-    .catch(err => {
-      alert("❌ Errore nell'invio Telegram");
-      console.error(err);
-      btn.innerText = 'Errore';
-    })
-    .finally(() => {
-      btn.disabled = false;
-    });
-  }
-</script>
 </body>
 </html>
