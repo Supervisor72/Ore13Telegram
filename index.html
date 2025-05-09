@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Ore 13</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        input[type="number"], select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .submit-section {
+            text-align: center;
+            margin-top: 40px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Report Ore 13</h1>
+
+        <div class="form-group">
+            <label for="punto-vendita">Punto Vendita</label>
+            <select id="punto-vendita" required>
+                <option value="">Seleziona punto vendita</option>
+                <option value="FANO">FANO</option>
+                <option value="MONSANO">MONSANO</option>
+                <option value="OSIMO">OSIMO</option>
+                <option value="MACERATA">MACERATA</option>
+                <option value="CIVITANOVA">CIVITANOVA</option>
+                <option value="PESARO">PESARO</option>
+            </select>
+        </div>
+
+        <div class="form-group"><label>Venduto (€)</label><input type="number" id="venduto" required></div>
+        <div class="form-group"><label>Controcifra Giorno (€)</label><input type="number" id="controcifra" required></div>
+        <div class="form-group"><label>Pos Classifica Attach Mese</label><input type="number" id="classifica" required></div>
+        <div class="form-group"><label>Incidenza Garanzie Mese (%)</label><input type="number" step="0.01" id="garanzie" required></div>
+
+        <div class="form-group"><label>iPhone (pezzi)</label><input type="number"></div>
+        <div class="form-group"><label>Garanzie iPhone (pezzi)</label><input type="number"></div>
+
+        <div class="form-group"><label>Apple PC (pezzi)</label><input type="number"></div>
+        <div class="form-group"><label>Garanzie Apple PC (pezzi)</label><input type="number"></div>
+
+        <div class="form-group"><label>Attivazioni Ho (pezzi)</label><input type="number"></div>
+        <div class="form-group"><label>Attivazioni Very Mobile (pezzi)</label><input type="number"></div>
+
+        <div class="form-group"><label>OLED (pezzi)</label><input type="number"></div>
+        <div class="form-group"><label>AEG Bianco (pezzi)</label><input type="number"></div>
+        <div class="form-group"><label>Asciugatrici (pezzi)</label><input type="number"></div>
+        <div class="form-group"><label>Scope No Fili (pezzi)</label><input type="number"></div>
+        <div class="form-group"><label>iRobot (pezzi)</label><input type="number"></div>
+        <div class="form-group"><label>Caffè Automatiche (pezzi)</label><input type="number"></div>
+
+        <div class="submit-section">
+            <button onclick="inviaTelegram()">Invia Report</button>
+        </div>
+    </div>
+
+    <script>
+        function inviaTelegram() {
+            const puntoVendita = document.getElementById('punto-vendita').value;
+            const venduto = document.getElementById('venduto').value;
+            const controcifra = document.getElementById('controcifra').value;
+            const classifica = document.getElementById('classifica').value;
+            const garanzie = document.getElementById('garanzie').value;
+
+            if (!puntoVendita || !venduto || !controcifra || !classifica || !garanzie) {
+                alert('Compila i campi obbligatori.');
+                return;
+            }
+
+            const messaggio = `🕐 *Report Ore 13*\n\n🏬 Punto Vendita: ${puntoVendita}\n\n📊 *Dati Principali:*\n• Venduto: €${venduto}\n• Controcifra Giorno: €${controcifra}\n• Posizione Classifica Attach Mese: ${classifica}\n• Incidenza Garanzie Mese: ${garanzie}%`;
+
+            const token = '7833765079:AAGF27Nm6wA2Xi20FacvOcfYeLGMeKY2z5w; // Inserire token reale
+            const chatId = '30945887'; // Inserire chat ID reale
+
+            fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: chatId, text: messaggio, parse_mode: 'Markdown' })
+            })
+            .then(response => response.json())
+            .then(data => alert('✅ Report inviato con successo su Telegram!'))
+            .catch(error => alert('Errore durante l\'invio su Telegram'));
+        }
+    </script>
+</body>
+</html>
