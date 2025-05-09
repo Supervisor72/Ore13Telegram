@@ -112,34 +112,7 @@
                 return;
             }
 
-            const messaggio = `🕐 *Report Ore 13*\n\n🏬 Punto Vendita: ${puntoVendita}\n\n📊 *Dati Principali:*\n• Venduto: €${venduto}\n• Controcifra Giorno: €${controcifra}\n• Posizione Classifica Attach Mese: ${classifica}\n• Incidenza Garanzie Mese: ${garanzie}%`;
-
-            const token = '7833765079:AAGF27Nm6wA2Xi20FacvOcfYeLGMeKY2z5w'; // Inserire token reale
-            const chatId = '30945887'; // Inserire chat ID reale
-
-            fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ chat_id: chatId, text: messaggio, parse_mode: 'Markdown' })
-            })
-            .then(response => response.json())
-            .then(data => alert('✅ Report inviato con successo su Telegram!'))
-            .catch(error => alert('Errore durante l\'invio su Telegram'));
-        }
-<script>
-function inviaTelegram() {
-    const puntoVendita = document.getElementById('punto-vendita').value;
-    const venduto = document.getElementById('venduto').value;
-    const controcifra = document.getElementById('controcifra').value;
-    const classifica = document.getElementById('classifica').value;
-    const garanzie = document.getElementById('garanzie').value;
-
-    if (!puntoVendita || !venduto || !controcifra || !classifica || !garanzie) {
-        alert('Compila i campi obbligatori.');
-        return;
-    }
-
-    const messaggio = 
+            const messaggio = 
 `🕐 *Report Ore 13*
 
 🏬 *${puntoVendita}*
@@ -150,21 +123,21 @@ function inviaTelegram() {
 • Posizione Classifica: ${classifica}
 • Incidenza Garanzie: ${garanzie}%`;
 
-    fetch("- https://script.google.com/macros/s/AKfycbyiPlrHqty6y4lyasr_D9hVwuh5nU6w052tJTDTEEZGGT8_NKjGyB2LA5LqpFkk9KHWdQ/exec", {
-        method: "POST",
-        body: JSON.stringify({ message: messaggio }),
-        headers: { "Content-Type": "application/json" }
-    })
-    .then(res => res.text())
-    .then(data => {
-        alert("✅ Messaggio Telegram inviato!");
-    })
-    .catch(err => {
-        alert("❌ Errore nell'invio Telegram");
-        console.error(err);
-    });
-}
-</script>
+            fetch("https://script.google.com/macros/s/AKfycbyiPlrHqty6y4lyasr_D9hVwuh5nU6w052tJTDTEEZGGT8_NKjGyB2LA5LqpFkk9KHWdQ/exec", {
+                method: "POST",
+                body: JSON.stringify({ message: messaggio }),
+                headers: { "Content-Type": "application/json" }
+            })
+            .then(res => res.text())
+            .then(data => {
+                alert("✅ Messaggio Telegram inviato!");
+            })
+            .catch(err => {
+                alert("❌ Errore nell'invio Telegram");
+                console.error(err);
+            });
+        }
+    </script>
   
 </body>
 </html>
