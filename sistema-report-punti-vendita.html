@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Report Punti Vendita</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .form-section {
+            margin-bottom: 25px;
+        }
+        .form-row {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+        .form-group {
+            margin-right: 15px;
+            flex: 1;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .time-selector {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        .time-buttons {
+            display: flex;
+            gap: 15px;
+            margin: 10px 0;
+        }
+        .time-btn {
+            flex: 1;
+            padding: 10px;
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            font-weight: 600;
+        }
+        .time-btn.active {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+        .data-section {
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        .confirmation {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            background-color: #d4edda;
+            color: #155724;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .telegram-section {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #eef5fa;
+            border-radius: 6px;
+            border-left: 4px solid #0088cc;
+        }
+        .telegram-title {
+            font-weight: 700;
+            color: #0088cc;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        .telegram-id {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .telegram-id input {
+            flex: 1;
+            margin-right: 10px;
+        }
+        .submit-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .auto-calc {
+            background-color: #e8f4f8;
+            border: 1px solid #b8d0e0;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        .auto-calc:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+        }
+        .telegram-desc {
+            font-size: 14px;
+            color: #555;
+            margin-top: 10px;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sistema Report Punti Vendita</h1>
+        
+        <div class="header-section">
+            <div class="form-group">
+                <label for="punto-vendita">Punto Vendita</label>
+                <select id="punto-vendita" required>
+                    <option value="">Seleziona punto vendita</option>
+                    <option value="FANO">FANO</option>
+                    <option value="MONSANO">MONSANO</option>
+                    <option value="OSIMO">OSIMO</option>
+                    <option value="MACERATA">MACERATA</option>
+                    <option value="CIVITANOVA">CIVITANOVA</option>
+                    <option value="PESARO">PESARO</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="data-report">Data</label>
+                <input type="date" id="data-report" required>
+            </div>
+        </div>
+        
+        <div class="time-selector">
+            <label>Orario Report</label>
+            <div class="time-buttons">
+                <div class="time-btn" id="ore-13" onclick="selectTime('ore-13')">Ore 13:00</div>
+                <div class="time-btn" id="ore-20" onclick="selectTime('ore-20')">Ore 20:00</div>
+            </div>
+        </div>
+        
+        <div class="data-section">
+            <h3>Dati Consuntivi</h3>
+            <div class="data-grid">
+                <div class="form-group">
+                    <label for="incasso-totale">Incasso Totale (€)</label>
+                    <input type="number" id="incasso-totale" step="0.01" placeholder="0.00" required oninput="calcolaValori()">
+                </div>
+                
+                <div class="form-group">
+                    <label for="numero-scontrini">Numero Scontrini</label>
+                    <input type="number" id="numero-scontrini" placeholder="0" required oninput="calcolaValori()">
+                </div>
+                
+                <div class="form-group">
+                    <label for="valore-medio">Valore Medio Scontrino (€)</label>
+                    <input type="number" id="valore-medio" step="0.01" placeholder="0.00" readonly class="auto-calc">
+                </div>
+                
+                <div class="form-group">
+                    <label for="clienti-totali">Clienti Totali</label>
+                    <input type="number" id="clienti-totali" placeholder="0" required oninput="calcolaConversione()">
+                </div>
+                
+                <div class="form-group">
+                    <label for="tasso-conversione">Tasso di Conversione (%)</label>
+                    <input type="number" id="tasso-conversione" step="0.01" placeholder="0.00" readonly class="auto-calc">
+                </div>
+                
+                <div class="form-group">
+                    <label for="costo-merce">Costo Merce (€)</label>
+                    <input type="number" id="costo-merce" step="0.01" placeholder="0.00" required oninput="calcolaMargine()">
+                </div>
+                
+                <div class="form-group">
+                    <label for="margine-lordo">Margine Lordo (€)</label>
+                    <input type="number" id="margine-lordo" step="0.01" placeholder="0.00" readonly class="auto-calc">
+                </div>
+                
+                <div class="form-group">
+                    <label for="margine-percentuale">Margine (%)</label>
+                    <input type="number" id="margine-percentuale" step="0.01" placeholder="0.00" readonly class="auto-calc">
+                </div>
+            </div>
+            
+            <div class="form-group" style="margin-top: 15px;">
+                <label for="note-aggiuntive">Note Aggiuntive</label>
+                <textarea id="note-aggiuntive" rows="3" placeholder="Inserisci eventuali note o osservazioni..."></textarea>
+            </div>
+        </div>
+        
+        <div class="telegram-section">
+            <div class="telegram-title">INVIO REPORT SU TELEGRAM</div>
+            <div class="telegram-id">
+                <input type="text" id="telegram-group" placeholder="Inserisci ID del gruppo o username su Telegram" value="">
+                <button onclick="testTelegram()">Testa connessione</button>
+            </div>
+            <div class="telegram-desc">
+                Il report verrà inviato al tuo gruppo Telegram e includerà un riepilogo dettagliato dei dati principali del punto vendita selezionato. Assicurati di inserire correttamente l'ID o l'username del gruppo.
+            </div>
+        </div>
+        
+        <div class="submit-section">
+            <button onclick="inviaReport()">INVIA REPORT</button>
+        </div>
+        
+        <div class="confirmation" id="confirmation-message">
+            Report inviato con successo!
+            <div id="telegram-status" style="margin-top: 10px; font-size: 14px;"></div>
+        </div>
+    </div>
+    
+    <script>
+        let selectedTime = null;
+        
+        function selectTime(timeId) {
+            document.getElementById('ore-13').classList.remove('active');
+            document.getElementById('ore-20').classList.remove('active');
+            
+            document.getElementById(timeId).classList.add('active');
+            selectedTime = timeId;
+        }
+        
+        // Funzioni per i calcoli automatici
+        function calcolaValori() {
+            const incasso = parseFloat(document.getElementById('incasso-totale').value) || 0;
+            const scontrini = parseInt(document.getElementById('numero-scontrini').value) || 0;
+            
+            // Calcola valore medio scontrino
+            let valoreMedio = 0;
+            if (scontrini > 0) {
+                valoreMedio = incasso / scontrini;
+            }
+            
+            document.getElementById('valore-medio').value = valoreMedio.toFixed(2);
+            
+            // Aggiorna altri calcoli che potrebbero dipendere da questi valori
+            calcolaConversione();
+            calcolaMargine();
+        }
+        
+        function calcolaConversione() {
+            const scontrini = parseInt(document.getElementById('numero-scontrini').value) || 0;
+            const clienti = parseInt(document.getElementById('clienti-totali').value) || 0;
+            
+            let tassoConversione = 0;
+            if (clienti > 0) {
+                tassoConversione = (scontrini / clienti) * 100;
+            }
+            
+            document.getElementById('tasso-conversione').value = tassoConversione.toFixed(2);
+        }
+        
+        function calcolaMargine() {
+            const incasso = parseFloat(document.getElementById('incasso-totale').value) || 0;
+            const costoMerce = parseFloat(document.getElementById('costo-merce').value) || 0;
+            
+            // Calcola margine lordo
+            const margineLordo = incasso - costoMerce;
+            document.getElementById('margine-lordo').value = margineLordo.toFixed(2);
+            
+            // Calcola percentuale margine
+            let marginePercentuale = 0;
+            if (incasso > 0) {
+                marginePercentuale = (margineLordo / incasso) * 100;
+            }
+            
+            document.getElementById('margine-percentuale').value = marginePercentuale.toFixed(2);
+        }
+        
+        function inviaReport() {
+            // Validazione dei campi
+            const puntoVendita = document.getElementById('punto-vendita').value;
+            const dataReport = document.getElementById('data-report').value;
+            const telegramGroup = document.getElementById('telegram-group').value;
+            
+            if (!puntoVendita || !dataReport || !selectedTime) {
+                alert('Compila tutti i campi obbligatori e seleziona un orario');
+                return;
+            }
+            
+            if (!telegramGroup) {
+                alert('Inserisci l\'ID o l\'username del gruppo Telegram');
+                return;
+            }
+            
+            // Simulazione invio report
+            document.getElementById('confirmation-message').style.display = 'block';
+            
+            // Invia notifica Telegram
+            inviaNotificaTelegram(puntoVendita, telegramGroup);
+            
+            // Scroll fino al messaggio di conferma
+            document.getElementById('confirmation-message').scrollIntoView({
+                behavior: 'smooth'
+            });
+            
+            // Reset form dopo alcuni secondi
+            setTimeout(() => {
+                document.getElementById('confirmation-message').style.display = 'none';
+            }, 5000);
+        }
+        
+        function inviaNotificaTelegram(puntoVendita, telegramGroup) {
+            const orario = selectedTime === 'ore-13' ? '13:00' : '20:00';
+            const data = document.getElementById('data-report').value;
+            const incasso = document.getElementById('incasso-totale').value;
+            const scontrini = document.getElementById('numero-scontrini').value;
+            const valoreMedio = document.getElementById('valore-medio').value;
+            const clienti = document.getElementById('clienti-totali').value;
+            const tassoConversione = document.getElementById('tasso-conversione').value;
+            const margineLordo = document.getElementById('margine-lordo').value;
+            const marginePerc = document.getElementById('margine-percentuale').value;
+            const note = document.getElementById('note-aggiuntive').value;
+            
+            // Aggiorna lo stato di invio Telegram
+            const telegramStatus = document.getElementById('telegram-status');
+            telegramStatus.innerHTML = `✅ Report inviato al gruppo Telegram: ${telegramGroup}`;
+            
+            // Simula invio a Telegram
+            console.log(`Invio report a Telegram gruppo: ${telegramGroup}`);
+            console.log(`📊 REPORT ${puntoVendita} - ${data} - ${orario}`);
+            console.log(`Incasso: €${incasso} | Scontrini: ${scontrini} | Valore Medio: €${valoreMedio}`);
+            console.log(`Clienti: ${clienti} | Tasso Conversione: ${tassoConversione}%`);
+            console.log(`Margine Lordo: €${margineLordo} | Margine: ${marginePerc}%`);
+            if (note) console.log(`Note: ${note}`);
+            
+            // In un'implementazione reale, qui ci sarebbe una chiamata API
+            // al Bot Telegram configurato per inviare messaggi
+        }
+        
+        function testTelegram() {
+            const telegramGroup = document.getElementById('telegram-group').value;
+            
+            if (!telegramGroup) {
+                alert('Inserisci prima l\'ID o username del gruppo Telegram');
+                return;
+            }
+            
+            alert(`Test di connessione inviato a "${telegramGroup}"! In un'implementazione reale, riceveresti un messaggio di prova sul tuo gruppo Telegram.`);
+            
+            // In un'implementazione reale, qui ci sarebbe una chiamata API
+            // al Bot Telegram per inviare un messaggio di test
+        }
+        
+        // Imposta la data di oggi come valore predefinito
+        document.getElementById('data-report').valueAsDate = new Date();
+    </script>
+</body>
+</html>
