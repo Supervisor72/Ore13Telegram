@@ -114,8 +114,8 @@
 
             const messaggio = `🕐 *Report Ore 13*\n\n🏬 Punto Vendita: ${puntoVendita}\n\n📊 *Dati Principali:*\n• Venduto: €${venduto}\n• Controcifra Giorno: €${controcifra}\n• Posizione Classifica Attach Mese: ${classifica}\n• Incidenza Garanzie Mese: ${garanzie}%`;
 
-            const token = '7833765079:AAGF27Nm6wA2Xi20FacvOcfYeLGMeKY2z5w; // Inserire token reale
-            const chatId = '30945887'; // Inserire chat ID reale
+            const token = 'INSERISCI_TOKEN_BOT'; // Inserire token reale
+            const chatId = 'INSERISCI_CHAT_ID'; // Inserire chat ID reale
 
             fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
                 method: 'POST',
@@ -126,9 +126,6 @@
             .then(data => alert('✅ Report inviato con successo su Telegram!'))
             .catch(error => alert('Errore durante l\'invio su Telegram'));
         }
-    </script>
-</body>
-</html>
 <script>
 function inviaTelegram() {
     const puntoVendita = document.getElementById('punto-vendita').value;
@@ -153,7 +150,7 @@ function inviaTelegram() {
 • Posizione Classifica: ${classifica}
 • Incidenza Garanzie: ${garanzie}%`;
 
-    fetch("- https://script.google.com/macros/s/AKfycbyiPlrHqty6y4lyasr_D9hVwuh5nU6w052tJTDTEEZGGT8_NKjGyB2LA5LqpFkk9KHWdQ/exec, {
+    fetch("- https://script.google.com/macros/s/AKfycbyiPlrHqty6y4lyasr_D9hVwuh5nU6w052tJTDTEEZGGT8_NKjGyB2LA5LqpFkk9KHWdQ/exec", {
         method: "POST",
         body: JSON.stringify({ message: messaggio }),
         headers: { "Content-Type": "application/json" }
@@ -168,3 +165,6 @@ function inviaTelegram() {
     });
 }
 </script>
+  
+</body>
+</html>
