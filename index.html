@@ -16,34 +16,62 @@
       max-width: 800px;
       margin: 0 auto;
       background-color: white;
-      padding: 20px;
+      padding: 30px;
       border-radius: 8px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
     h1 {
       color: #2c3e50;
-      font-size: 24px;
+      font-size: 28px;
       margin-bottom: 30px;
       text-align: center;
     }
-    .section-title {
-      font-weight: bold;
-      margin-bottom: 15px;
-      color: #34495e;
-    }
-    .content {
+    .form-group {
       margin-bottom: 25px;
     }
-    .content span {
-      display: block;
-      margin-bottom: 12px;
-    }
-    .content ul {
-      margin: 15px 0;
-      padding-left: 20px;
-    }
-    .content ul li {
+    label {
+      font-weight: bold;
       margin-bottom: 10px;
+      display: block;
+      font-size: 16px;
+      color: #34495e;
+    }
+    input, select {
+      width: 100%;
+      padding: 15px;
+      font-size: 16px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      background-color: #f1f1f1;
+      margin-top: 8px;
+      box-sizing: border-box;
+    }
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    select {
+      background-color: #fff;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 18px 30px;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+    button:hover {
+      background-color: #0056b3;
     }
     .footer {
       text-align: center;
@@ -54,13 +82,14 @@
   </style>
 </head>
 <body>
+
   <div class="container">
     <h1>Report Ore 13</h1>
-
-    <div class="content">
-      <span class="section-title">🕐 Dati Principali</span>
-      <span><strong>Punto Vendita:</strong> 
-        <select name="punto-vendita">
+    <form action="mailto:d.pavoni@dml-italia.com" method="post" enctype="text/plain">
+      <div class="form-group">
+        <label for="punto-vendita">Punto Vendita</label>
+        <select id="punto-vendita" name="punto-vendita" required>
+          <option value="">Seleziona punto vendita</option>
           <option value="FANO">FANO</option>
           <option value="MONSANO">MONSANO</option>
           <option value="OSIMO">OSIMO</option>
@@ -68,34 +97,93 @@
           <option value="CIVITANOVA">CIVITANOVA</option>
           <option value="PESARO">PESARO</option>
         </select>
-      </span>
-      <span><strong>Venduto (€):</strong> 1200</span>
-      <span><strong>Controcifra Giorno (€):</strong> 450</span>
-      <span><strong>Posizione Classifica:</strong> 3°</span>
-      <span><strong>Incidenza Garanzie (%):</strong> 8.5%</span>
-    </div>
+      </div>
 
-    <div class="content">
-      <span class="section-title">📦 Dettagli Prodotti</span>
-      <ul>
-        <li><strong>iPhone (pezzi):</strong> 15</li>
-        <li><strong>Garanzie iPhone (pezzi):</strong> 5</li>
-        <li><strong>Apple PC (pezzi):</strong> 10</li>
-        <li><strong>Garanzie Apple PC (pezzi):</strong> 3</li>
-        <li><strong>Attivazioni Ho (pezzi):</strong> 7</li>
-        <li><strong>Attivazioni Very Mobile (pezzi):</strong> 10</li>
-        <li><strong>OLED (pezzi):</strong> 8</li>
-        <li><strong>AEG Bianco (pezzi):</strong> 12</li>
-        <li><strong>Asciugatrici (pezzi):</strong> 9</li>
-        <li><strong>Scope No Fili (pezzi):</strong> 6</li>
-        <li><strong>iRobot (pezzi):</strong> 4</li>
-        <li><strong>Caffè Automatiche (pezzi):</strong> 5</li>
-      </ul>
-    </div>
+      <div class="form-group">
+        <label for="venduto">Venduto (€)</label>
+        <input type="number" id="venduto" name="venduto" required>
+      </div>
 
-    <div class="footer">
-      <p>Questo è un messaggio automatico. Non rispondere direttamente a questa email.</p>
-    </div>
+      <div class="form-group">
+        <label for="controcifra">Controcifra Giorno (€)</label>
+        <input type="number" id="controcifra" name="controcifra" required>
+      </div>
+
+      <div class="form-group">
+        <label for="classifica">Posizione Classifica</label>
+        <input type="number" id="classifica" name="classifica" required>
+      </div>
+
+      <div class="form-group">
+        <label for="garanzie">Incidenza Garanzie (%)</label>
+        <input type="number" step="0.01" id="garanzie" name="garanzie" required>
+      </div>
+
+      <div class="form-group">
+        <label for="iphone">iPhone (pezzi)</label>
+        <input type="number" id="iphone" name="iphone">
+      </div>
+
+      <div class="form-group">
+        <label for="garanzie-iphone">Garanzie iPhone (pezzi)</label>
+        <input type="number" id="garanzie-iphone" name="garanzie-iphone">
+      </div>
+
+      <div class="form-group">
+        <label for="apple-pc">Apple PC (pezzi)</label>
+        <input type="number" id="apple-pc" name="apple-pc">
+      </div>
+
+      <div class="form-group">
+        <label for="garanzie-apple-pc">Garanzie Apple PC (pezzi)</label>
+        <input type="number" id="garanzie-apple-pc" name="garanzie-apple-pc">
+      </div>
+
+      <div class="form-group">
+        <label for="ho">Attivazioni Ho (pezzi)</label>
+        <input type="number" id="ho" name="ho">
+      </div>
+
+      <div class="form-group">
+        <label for="very">Attivazioni Very Mobile (pezzi)</label>
+        <input type="number" id="very" name="very">
+      </div>
+
+      <div class="form-group">
+        <label for="oled">OLED (pezzi)</label>
+        <input type="number" id="oled" name="oled">
+      </div>
+
+      <div class="form-group">
+        <label for="aeg">AEG Bianco (pezzi)</label>
+        <input type="number" id="aeg" name="aeg">
+      </div>
+
+      <div class="form-group">
+        <label for="asciugatrici">Asciugatrici (pezzi)</label>
+        <input type="number" id="asciugatrici" name="asciugatrici">
+      </div>
+
+      <div class="form-group">
+        <label for="scope">Scope No Fili (pezzi)</label>
+        <input type="number" id="scope" name="scope">
+      </div>
+
+      <div class="form-group">
+        <label for="irobot">iRobot (pezzi)</label>
+        <input type="number" id="irobot" name="irobot">
+      </div>
+
+      <div class="form-group">
+        <label for="caffe">Caffè Automatiche (pezzi)</label>
+        <input type="number" id="caffe" name="caffe">
+      </div>
+
+      <div class="form-group" style="text-align:center;">
+        <button type="submit">Invia Report</button>
+      </div>
+    </form>
   </div>
+
 </body>
 </html>
