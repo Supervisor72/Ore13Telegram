@@ -120,40 +120,32 @@
       return;
     }
 
-    let msg = `DATI ORE 13 ${pv.toUpperCase()}
-    
-* VENDUTO: €${venduto}
+    const msg = `
+ORE 13 ${pv.toUpperCase()}
 
-* CONTROCIFRA GIORNO: €${controcifra}
+VENDUTO: €${venduto}
+CONTROCIFRA: €${controcifra}
 
-* POS CLASSIFICA ATTACH MESE (ATTACH): ${classifica}
+POS. CLASSIFICA: ${classifica}
+POS. ATTACH MESE: ${classifica}
 
-* INCIDENZA GARANZIE MESE (%): ${garanzie}%`;
+INCIDENZA GARANZIE MESE: ${garanzie}%
 
-    const extraFields = [
-      { id: 'iphone', label: '* IPHONE' },
-      { id: 'garanzie-iphone', label: '* GARANZIE IPHONE' },
-      { id: 'apple-pc', label: '* APPLE PC' },
-      { id: 'garanzie-apple-pc', label: '* GARANZIE APPLE PC' },
-      { id: 'ho', label: '* ATTIVAZIONI HO' },
-      { id: 'very', label: '* ATTIVAZIONI VERY MOBILE' },
-      { id: 'oled', label: '* OLED' },
-      { id: 'aeg', label: '* AEG BIANCO' },
-      { id: 'asciugatrici', label: '* ASCIUGATRICI' },
-      { id: 'scope', label: '* SCOPE NO FILI' },
-      { id: 'irobot', label: '* I-ROBOT' },
-      { id: 'caffe', label: '* CAFFE’ AUTOMATICHE' }
-    ];
+IPHONE/GARANZIE: ${get('iphone') || '0'}/${get('garanzie-iphone') || '0'}
+APPLE PC/GARANZIE: ${get('apple-pc') || '0'}/${get('garanzie-apple-pc') || '0'}
 
-    extraFields.forEach(f => {
-      const val = get(f.id);
-      msg += `
+ATT. HO MOBILE: ${get('ho') || '0'}
+ATT. VERY: ${get('very') || '0'}
 
-${f.label}: ${val || 'N/A'}`;
-    });
+OLED: ${get('oled') || '0'}
+AEG: ${get('aeg') || '0'}
+ASCIUGATRICI: ${get('asciugatrici') || '0'}
+SCOPE NO FILI: ${get('scope') || '0'}
+IROBOT: ${get('irobot') || '0'}
+CAFFÈ AUTOMATICHE: ${get('caffe') || '0'}
+    `.trim();
 
     const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(msg)}`;
-
     window.open(telegramUrl, '_blank');
 
     btn.innerText = 'Invio completato ✅';
