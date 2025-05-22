@@ -80,8 +80,11 @@
   <div class="form-group"><label>Controcifra Giorno (€)</label><input type="number" id="controcifra" required></div>
   <div class="form-group"><label>Pos Classifica Attach Mese</label><input type="number" id="classifica" required></div>
   <div class="form-group"><label>Incidenza Garanzie Mese (%)</label><input type="number" step="0.01" id="garanzie" required></div>
-  <div class="form-group"><label>Pagodil (pezzi)</label><input type="number" id="pagodil"></div>
 
+  <div class="form-group"><label>Promo 50</label><input type="number" id="promo50"></div>
+  <div class="form-group"><label>Promo 100</label><input type="number" id="promo100"></div>
+
+  <div class="form-group"><label>Pagodil (pezzi)</label><input type="number" id="pagodil"></div>
   <div class="form-group"><label>iPhone (pezzi)</label><input type="number" id="iphone"></div>
   <div class="form-group"><label>Garanzie iPhone (pezzi)</label><input type="number" id="garanzie-iphone"></div>
   <div class="form-group"><label>Apple PC (pezzi)</label><input type="number" id="apple-pc"></div>
@@ -113,6 +116,8 @@
     const controcifra = get('controcifra');
     const classifica = get('classifica');
     const garanzie = get('garanzie');
+    const promo50 = get('promo50') || '0';
+    const promo100 = get('promo100') || '0';
     const pagodil = get('pagodil');
 
     if (!pv || !venduto || !controcifra || !classifica || !garanzie) {
@@ -132,6 +137,8 @@ POS. CLASSIFICA: ${classifica}
 POS. ATTACH MESE: ${classifica}
 
 INCIDENZA GARANZIE MESE: ${garanzie}%
+PROMO 50: ${promo50}
+PROMO 100: ${promo100}
 PAGODIL: ${pagodil || '0'} pezzi
 
 IPHONE/GARANZIE: ${get('iphone') || '0'}/${get('garanzie-iphone') || '0'}
