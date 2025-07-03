@@ -83,8 +83,8 @@
 
   <div class="form-group"><label>Promo 50</label><input type="number" id="promo50"></div>
   <div class="form-group"><label>Promo 100</label><input type="number" id="promo100"></div>
+  <div class="form-group"><label>Promo Alternative (pezzi)</label><input type="number" id="promo-alternative"></div>
 
-  <div class="form-group"><label>Pagodil (pezzi)</label><input type="number" id="pagodil"></div>
   <div class="form-group"><label>iPhone (pezzi)</label><input type="number" id="iphone"></div>
   <div class="form-group"><label>Garanzie iPhone (pezzi)</label><input type="number" id="garanzie-iphone"></div>
   <div class="form-group"><label>Apple PC (pezzi)</label><input type="number" id="apple-pc"></div>
@@ -118,7 +118,7 @@
     const garanzie = get('garanzie');
     const promo50 = get('promo50') || '0';
     const promo100 = get('promo100') || '0';
-    const pagodil = get('pagodil');
+    const promoAlternative = get('promo-alternative') || '0'; // Nuova variabile
 
     if (!pv || !venduto || !controcifra || !classifica || !garanzie) {
       alert('Compila i campi obbligatori.');
@@ -139,7 +139,7 @@ POS. ATTACH MESE: ${classifica}
 INCIDENZA GARANZIE MESE: ${garanzie}%
 PROMO 50: ${promo50}
 PROMO 100: ${promo100}
-PAGODIL: ${pagodil || '0'} pezzi
+PROMO ALTERNATIVE: ${promoAlternative} pezzi
 
 IPHONE/GARANZIE: ${get('iphone') || '0'}/${get('garanzie-iphone') || '0'}
 APPLE PC/GARANZIE: ${get('apple-pc') || '0'}/${get('garanzie-apple-pc') || '0'}
