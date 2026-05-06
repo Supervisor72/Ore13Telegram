@@ -138,7 +138,8 @@ ASP.ROBOTIZZATI: ${get('robot')}
 CAFFÈ AUTOMATICHE: ${get('caffe')}
     `.trim();
 
-    const telegramUrl = `https://t.me/share/url?text=${encodeURIComponent(msg)}`;
+    // VERSIONE CORRETTA CHE PRECOMPILA IL MESSAGGIO
+    const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(msg)}`;
     window.open(telegramUrl, '_blank');
 
     btn.innerText = 'Invio completato ✅';
